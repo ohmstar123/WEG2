@@ -12,29 +12,105 @@ namespace WEG2
 {
     public partial class Part1Screen : UserControl
     {
-        //TODO - Create buttons for the player movement and a button for the pause screen
+        //Create buttons for the player movement and a button for the pause screen
+        Boolean upArrowDown, downArrowDown, leftArrowDown, rightArrowDown, escapeDown;
 
-        
-        //TODO - Create brushes to draw with 
+        //Create brushes to draw with 
+        SolidBrush whiteBrush = new SolidBrush(Color.White);
+        SolidBrush blueBrush = new SolidBrush(Color.Blue);
+        SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
+        SolidBrush blackBrush = new SolidBrush(Color.Black);
+        SolidBrush greenBrush = new SolidBrush(Color.Green);
+        SolidBrush testBrush = new SolidBrush(Color.Orange);
 
+        //Create one list for the enemies 
+        List<Entity> enemy = new List<Entity>();
 
-        //TODO - Create four lists, each one representing the enemies starting positions 
+        //Create two lists, one for the map that the player is allowed to travel on and another for the boundaries
+        List<Entity> boundaries = new List<Entity>();
+        List<Entity> playground = new List<Entity>();
 
+        //Create a list for the coins
+        List<Entity> coins = new List<Entity>();
 
-        //TODO - Create two lists, one for the map that the player is allowed to travel on and another for the boundaries
+        //Player values 
+        Entity player;
 
-
-        //TODO - Player values 
-
+        //Key values
+        Entity key;
 
         public Part1Screen()
         {
             InitializeComponent();
+            OnStart();
         }
 
         public void OnStart()
         {
-            //TODO - Get game start values
+            //TODO - Get the coordinates for the boundaries and add them to the boundaries list
+
+
+            //TODO - Get the coordinates for the player area and add them to the playground list
+
+
+            //TODO - Get the coordinates for the player starting location 
+
+
+            //TODO - Get the coordinates for the coins and add them to the coins list
+
+
+            //TODO - Get the coordinates for the key 
+
+
+        }
+
+        private void Part1Screen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            //TODO - Add the up, down, left, right keys and set them to true
+
+        }
+
+        private void Part1Screen_KeyUp(object sender, KeyEventArgs e)
+        {
+            //TODO - Add the up, down, left, right keys and set them to false
+
+        }
+
+        private void gameLoop_Tick(object sender, EventArgs e)
+        {
+            //TODO - Move the player
+
+
+            //TODO - Move the enemies
+
+
+            //TODO - Check collision between player and boundaries
+
+
+            //TODO - Check collision between player and enemies
+
+
+            //TODO - Check collision between player and coins
+
+
+            //TODO - Check collision between player and key 
+
+
+        }
+
+        private void Part1Screen_Paint(object sender, PaintEventArgs e)
+        {
+            //TODO - Draw the player (which should be a square)
+
+
+            //TODO - Draw the area which the player will be able to allowed on 
+
+
+            //TODO - FOR NOW, draw in the boundaries but delete them after because they must not be showing
+
+
+            //TODO - Draw the enemies
+            e.Graphics.FillRectangle(testBrush, 50, 50, 10, 10); // JUST TESTING, DELETE AFTER
         }
     }
 }
