@@ -14,8 +14,8 @@ namespace WEG2
     {
         public Form1()
         {
-            InitializeComponent(); Cursor.Hide();
-          
+            InitializeComponent(); 
+            //Cursor.Hide();      
         }
 
         private void Form1_Load(object sender, EventArgs e)

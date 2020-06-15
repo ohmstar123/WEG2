@@ -20,7 +20,7 @@ namespace WEG2
         SolidBrush blueBrush = new SolidBrush(Color.Blue);
         SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
         SolidBrush blackBrush = new SolidBrush(Color.Black);
-        SolidBrush greenBrush = new SolidBrush(Color.Green);
+        SolidBrush greenBrush = new SolidBrush(Color.LimeGreen);
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush testBrush = new SolidBrush(Color.Orange);
 
@@ -29,7 +29,10 @@ namespace WEG2
 
         //Create two lists, one for the map that the player is allowed to travel on and another for the boundaries
         List<Entity> boundaries = new List<Entity>();
-        List<Entity> playground = new List<Entity>();
+        List<Entity> playgroundGreen = new List<Entity>();
+        List<Entity> playgroundWhite = new List<Entity>();
+        List<Entity> playgroundBlack = new List<Entity>();
+
 
         //Create a list for the coins
         List<Entity> coins = new List<Entity>();
@@ -49,8 +52,10 @@ namespace WEG2
         public void OnStart()
         {
             //TODO - Get the coordinates for the boundaries and add them to the boundaries list
-
-
+            Entity boundary1 = new Entity(98, 250, 102, 102);
+            playgroundGreen.Add(boundary1);
+            Entity boundary2 = new Entity(200, 275, 50, 52);
+            playgroundWhite.Add(boundary2);
             //TODO - Get the coordinates for the player area and add them to the playground list
 
 
@@ -154,17 +159,25 @@ namespace WEG2
 
         private void Part1Screen_Paint(object sender, PaintEventArgs e)
         {
-            //TODO - Draw the player (which should be a square)
-            e.Graphics.FillRectangle(redBrush, player.x, player.y, player.sizeX, player.sizeY);
+            //TODO - Draw the area which the player will be allowed on 
+            foreach (Entity p in playgroundGreen)
+            {
+                e.Graphics.FillRectangle(greenBrush, p.x, p.y, p.sizeX, p.sizeY);
+            }
 
-            //TODO - Draw the area which the player will be able to allowed on 
-
+            foreach (Entity w in playgroundWhite)
+            {
+                e.Graphics.FillRectangle(whiteBrush, w.x, w.y, w.sizeX, w.sizeY);
+            }
 
             //TODO - FOR NOW, draw in the boundaries but delete them after because they must not be showing
 
 
             //TODO - Draw the enemies
             e.Graphics.FillRectangle(testBrush, 50, 50, 10, 10); // JUST TESTING, DELETE AFTER
+
+            //TODO - Draw the player (which should be a square)
+            e.Graphics.FillRectangle(redBrush, player.x, player.y, player.sizeX, player.sizeY);
         }
     }
 }
