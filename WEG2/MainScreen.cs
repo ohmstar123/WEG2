@@ -15,7 +15,6 @@ namespace WEG2
         public MainScreen()
         {
             InitializeComponent();
-            
         }
 
         private void endGameButton_Click(object sender, EventArgs e)
@@ -32,6 +31,7 @@ namespace WEG2
             Part1Screen p1 = new Part1Screen();
             f.Controls.Add(p1);
             p1.Location = new Point((f.Width - p1.Width) / 2, (f.Height - p1.Height) / 2);
+            p1.Focus();
         }
 
         private void instructionsButton_Click(object sender, EventArgs e)

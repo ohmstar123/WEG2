@@ -27,6 +27,8 @@ namespace WEG2
             y = _y;
             sizeX = _sizeX;
             sizeY = _sizeY;
+
+            
         }
 
         //Create another class for the boundaries and play area
@@ -41,25 +43,49 @@ namespace WEG2
         public void UpMovement()
         {
             //Make the enemy/player move up
-            y = y - 1;
+            y = y - speed;
         }
 
         public void DownMovement()
         {
             //Make the enemy/player move down
-            y = y + 1;
+            y = y + speed;
         }
 
         public void LeftMovement()
         {
             //Make the enemy/player move left
-            x = x - 1;
+            x = x - speed;
         }
 
         public void RightMovement()
         {
             //Make the enemy/player move right
-            x = x + 1;
+            x = x + speed;
+        }
+
+        public void Move(string direction)
+        {
+            //Movement of the players depending what button is pressed
+            if (direction == "Up")
+            {
+                y = y - 3;
+            }
+
+            if (direction == "Down")
+            {
+                y = y + speed;
+            }
+
+            if (direction == "Left")
+            {
+                x = x - speed;
+            }
+
+            if (direction == "Right")
+            {
+                x = x + speed;
+            }
         }
     }
 }

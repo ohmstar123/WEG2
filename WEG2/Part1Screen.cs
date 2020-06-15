@@ -21,6 +21,7 @@ namespace WEG2
         SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
         SolidBrush blackBrush = new SolidBrush(Color.Black);
         SolidBrush greenBrush = new SolidBrush(Color.Green);
+        SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush testBrush = new SolidBrush(Color.Orange);
 
         //Create one list for the enemies 
@@ -54,7 +55,7 @@ namespace WEG2
 
 
             //TODO - Get the coordinates for the player starting location 
-
+            player = new Entity(140, 290, 14, 14, 3); 
 
             //TODO - Get the coordinates for the coins and add them to the coins list
 
@@ -66,20 +67,73 @@ namespace WEG2
 
         private void Part1Screen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            //TODO - Add the up, down, left, right keys and set them to true
-
+            //Add the up, down, left, right keys and set them to true
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    upArrowDown = true;
+                    break;
+                case Keys.Down:
+                    downArrowDown = true;
+                    break;
+                case Keys.Left:
+                    leftArrowDown = true;
+                    break;
+                case Keys.Right:
+                    rightArrowDown = true;
+                    break;
+                case Keys.Escape:
+                    escapeDown = true;
+                    break;
+            }
         }
 
         private void Part1Screen_KeyUp(object sender, KeyEventArgs e)
         {
-            //TODO - Add the up, down, left, right keys and set them to false
-
+            //Add the up, down, left, right keys and set them to false
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    upArrowDown = false;
+                    break;
+                case Keys.Down:
+                    downArrowDown = false;
+                    break;
+                case Keys.Left:
+                    leftArrowDown = false;
+                    break;
+                case Keys.Right:
+                    rightArrowDown = false;
+                    break;
+                case Keys.Escape:
+                    escapeDown = false;
+                    break;
+            }
         }
 
         private void gameLoop_Tick(object sender, EventArgs e)
         {
+            this.Focus();
             //TODO - Move the player
+            if (upArrowDown)
+            {
+                player.Move("Up");
+            }
 
+            if (downArrowDown)
+            {
+                player.Move("Down");
+            }
+
+            if (leftArrowDown)
+            {
+                player.Move("Left");
+            }
+
+            if (rightArrowDown)
+            {
+                player.Move("Right");
+            }
 
             //TODO - Move the enemies
 
@@ -101,7 +155,7 @@ namespace WEG2
         private void Part1Screen_Paint(object sender, PaintEventArgs e)
         {
             //TODO - Draw the player (which should be a square)
-
+            e.Graphics.FillRectangle(redBrush, player.x, player.y, player.sizeX, player.sizeY);
 
             //TODO - Draw the area which the player will be able to allowed on 
 
