@@ -69,7 +69,7 @@ namespace WEG2
             //Movement of the players depending what button is pressed
             if (direction == "Up")
             {
-                y = y - 3;
+                y = y - speed;
             }
 
             if (direction == "Down")

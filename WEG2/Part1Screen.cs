@@ -19,7 +19,7 @@ namespace WEG2
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         SolidBrush blueBrush = new SolidBrush(Color.Blue);
         SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
-        SolidBrush blackBrush = new SolidBrush(Color.Black);
+        SolidBrush grayBrush = new SolidBrush(Color.Gray);
         SolidBrush greenBrush = new SolidBrush(Color.LimeGreen);
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush testBrush = new SolidBrush(Color.Orange);
@@ -31,7 +31,7 @@ namespace WEG2
         List<Entity> boundaries = new List<Entity>();
         List<Entity> playgroundGreen = new List<Entity>();
         List<Entity> playgroundWhite = new List<Entity>();
-        List<Entity> playgroundBlack = new List<Entity>();
+        List<Entity> playgroundGray = new List<Entity>();
 
 
         //Create a list for the coins
@@ -52,10 +52,30 @@ namespace WEG2
         public void OnStart()
         {
             //TODO - Get the coordinates for the boundaries and add them to the boundaries list
-            Entity boundary1 = new Entity(98, 250, 102, 102);
+            Entity boundary1 = new Entity(98, 250, 102, 102); //Spawn area
             playgroundGreen.Add(boundary1);
-            Entity boundary2 = new Entity(200, 275, 50, 52);
+            Entity boundary2 = new Entity(200, 275, 50, 52);  //Bridge from spawn to main play area
             playgroundWhite.Add(boundary2);
+            Entity boundary3 = new Entity(250, 200, 475, 75); //Top bar
+            playgroundWhite.Add(boundary3);
+            Entity boundary4 = new Entity(250, 327, 475, 75); //Bottom bar
+            playgroundWhite.Add(boundary4);
+            Entity boundary5 = new Entity(250, 275, 75, 52);  //First inside block
+            playgroundWhite.Add(boundary5);
+            Entity boundary6 = new Entity(375, 275, 75, 52);  //Second inside block
+            playgroundWhite.Add(boundary6);
+            Entity boundary7 = new Entity(525, 275, 75, 52);  //Third inside block
+            playgroundWhite.Add(boundary7);
+            Entity boundary8 = new Entity(650, 275, 75, 52);  //Fourth inside block
+            playgroundWhite.Add(boundary8);
+            Entity boundary9 = new Entity(725, 275, 50, 52);  //Bridge from main play area to barrier
+            playgroundGray.Add(boundary9);
+            Entity boundary10 = new Entity(775, 250, 72, 102);//White game win zone 
+            playgroundWhite.Add(boundary10);
+            Entity boundary11 = new Entity(847, 250, this.Width, 102); // Green game win zone
+            playgroundGreen.Add(boundary11);
+            //TODO - add the top two coin zone coordinates and the bottom coin zone coordinates (REMOVE THIS LINE OF COMMENTS AFTER)
+
             //TODO - Get the coordinates for the player area and add them to the playground list
 
 
@@ -168,6 +188,11 @@ namespace WEG2
             foreach (Entity w in playgroundWhite)
             {
                 e.Graphics.FillRectangle(whiteBrush, w.x, w.y, w.sizeX, w.sizeY);
+            }
+
+            foreach (Entity b in playgroundGray)
+            {
+                e.Graphics.FillRectangle(grayBrush, b.x, b.y, b.sizeX, b.sizeY);
             }
 
             //TODO - FOR NOW, draw in the boundaries but delete them after because they must not be showing
