@@ -17,6 +17,7 @@ namespace WEG2
             y = _y;
             sizeX = _sizeX;
             sizeY = _sizeY;
+            speed = _speed;
             positionNumber = _positionNumber;
         }
 
@@ -27,8 +28,8 @@ namespace WEG2
             y = _y;
             sizeX = _sizeX;
             sizeY = _sizeY;
+            speed = _speed;
 
-            
         }
 
         //Create another class for the boundaries and play area
