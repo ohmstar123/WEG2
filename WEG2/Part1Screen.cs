@@ -88,7 +88,7 @@ namespace WEG2
             playgroundGray.Add(playArea17);
 
 
-            //TODO - Get the coordinates for the boundaries and add them to the boundaries list
+            //Get the coordinates for the boundaries and add them to the boundaries list
             Entity boundary1 = new Entity(0, 0, this.Width, 137); //Top Bar
             boundaries.Add(boundary1);
             Entity boundary2 = new Entity(0, 137, 312, 42); //Right bar on same horizontal plane as first coin area
@@ -121,6 +121,36 @@ namespace WEG2
             boundaries.Add(boundary15);
             Entity boundary16 = new Entity(725, 352, this.Width, 50); //Right bar on same horizontal plane as the bottom bar of the playground
             boundaries.Add(boundary16);
+            Entity boundary17 = new Entity(0, 402, 462, 21); //Left bar on same horizontal plane as bridge to third coin area
+            boundaries.Add(boundary17);
+            Entity boundary18 = new Entity(512, 402, this.Width, 21); //Right bar on same horizontal plane as bridge to third coin area
+            boundaries.Add(boundary18);
+            Entity boundary19 = new Entity(0, 423, 450, 42); //Left bar on same horizontal plane as third coin area
+            boundaries.Add(boundary19);
+            Entity boundary20 = new Entity(525, 423, this.Width, 42); //Right bar on same horizontal plane as third coin area
+            boundaries.Add(boundary20);
+            Entity boundary21 = new Entity(0, 465, this.Width, this.Height); //Bottom bar
+            boundaries.Add(boundary21);
+            Entity boundary22 = new Entity(325, 275, 50, 52); // Inside first block
+            boundaries.Add(boundary22);
+            Entity boundary23 = new Entity(450, 275, 75, 52); //Inside second block
+            boundaries.Add(boundary23);
+            Entity boundary24 = new Entity(600, 275, 50, 52); //Inside third block
+            boundaries.Add(boundary24);
+
+            //TODO - Get the coordinates for the monsters 
+            Entity monster1 = new Entity(284, 206, 14, 14, 3, 1); //Top right monster #1
+            enemy.Add(monster1);
+            Entity monster2 = new Entity(284, 230, 14, 14, 3, 1); //Top right monster #2
+            enemy.Add(monster2);
+            Entity monster3 = new Entity(284, 254, 14, 14, 3, 1); //Top right monster #3
+            enemy.Add(monster3);
+            Entity monster4 = new Entity(675, 382, 14, 14, 3, 2);
+            enemy.Add(monster4);
+            Entity monster5 = new Entity(675, 358, 14, 14, 3, 2);
+            enemy.Add(monster5);
+            Entity monster6 = new Entity(675, 334, 14, 14, 3, 2);
+            enemy.Add(monster6);
 
             //Get the coordinates for the player starting location 
             player = new Entity(140, 290, 14, 14, 3); 
@@ -181,8 +211,11 @@ namespace WEG2
 
         private void gameLoop_Tick(object sender, EventArgs e)
         {
-            this.Focus();
-            //TODO - Move the player
+            //Create temp x and y values for the player which will be used in collision method with boundaries
+            int tempX = player.x;
+            int tempY = player.y;
+
+            //Move the player
             if (upArrowDown)
             {
                 player.Move("Up");
@@ -207,7 +240,15 @@ namespace WEG2
 
 
             //TODO - Check collision between player and boundaries
-
+            
+            foreach (Entity boundary in boundaries)
+            {
+                if (boundary.Collision(player))
+                {
+                    player = new Entity(tempX, tempY, 14, 14, 3);
+                    
+                }
+            }
 
             //TODO - Check collision between player and enemies
 
@@ -246,6 +287,10 @@ namespace WEG2
             }
 
             //TODO - Draw the enemies
+            foreach (Entity m in enemy)
+            {
+                e.Graphics.FillEllipse(blueBrush, m.x, m.y, m.sizeX, m.sizeY);
+            }
 
 
             //TODO - Draw the player (which should be a square)

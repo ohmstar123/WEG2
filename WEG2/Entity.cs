@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace WEG2
 {
@@ -86,6 +87,22 @@ namespace WEG2
             if (direction == "Right")
             {
                 x = x + speed;
+            }
+        }
+
+        public Boolean Collision(Entity player)
+        {
+            Rectangle playerRec = new Rectangle(player.x, player.y, player.sizeX, player.sizeY);
+            Rectangle boundaryRec = new Rectangle(x, y, sizeX, sizeY);
+
+
+            if (boundaryRec.IntersectsWith(playerRec))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
