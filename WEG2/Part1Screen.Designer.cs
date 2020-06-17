@@ -63,6 +63,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.Controls.Add(this.bottomBlackLabel);
             this.Controls.Add(this.topBlackLabel);
+            this.DoubleBuffered = true;
             this.Name = "Part1Screen";
             this.Size = new System.Drawing.Size(1350, 900);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Part1Screen_Paint);
