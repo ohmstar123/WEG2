@@ -34,14 +34,14 @@ namespace WEG2
         List<Entity> playgroundGray = new List<Entity>();
 
 
-        //Create a list for the coins
-        List<Entity> coins = new List<Entity>();
+        //Create the four coins here so they can be manipulated later
 
         //Player values 
         Entity player;
 
-        //Key values
-        Entity key;
+       
+
+        
 
         public Part1Screen()
         {
@@ -51,6 +51,10 @@ namespace WEG2
 
         public void OnStart()
         {
+            //Variables used
+            int monSpeed = 3;
+            int monSize = 14;
+
             //Get the coordinates for the player area and add them to the playground list
             Entity playArea1 = new Entity(98, 250, 102, 102); //Spawn area
             playgroundGreen.Add(playArea1);
@@ -139,18 +143,43 @@ namespace WEG2
             boundaries.Add(boundary24);
 
             //TODO - Get the coordinates for the monsters 
-            Entity monster1 = new Entity(284, 206, 14, 14, 3, 1); //Top right monster #1
+            Entity monster1 = new Entity(284, 206, monSize, monSize, monSpeed, 1); //Top right monster #1
             enemy.Add(monster1);
-            Entity monster2 = new Entity(284, 230, 14, 14, 3, 1); //Top right monster #2
+            Entity monster2 = new Entity(284, 230, monSize, monSize, monSpeed, 1); //Top right monster #2
             enemy.Add(monster2);
-            Entity monster3 = new Entity(284, 254, 14, 14, 3, 1); //Top right monster #3
+            Entity monster3 = new Entity(284, 254, monSize, monSize, monSpeed, 1); //Top right monster #3
             enemy.Add(monster3);
-            Entity monster4 = new Entity(675, 382, 14, 14, 3, 2);
+            Entity monster4 = new Entity(675, 382, monSize, monSize, monSpeed, 2); //Bottom Left monster #1
             enemy.Add(monster4);
-            Entity monster5 = new Entity(675, 358, 14, 14, 3, 2);
+            Entity monster5 = new Entity(675, 358, monSize, monSize, monSpeed, 2); //Bottom Left monster #2
             enemy.Add(monster5);
-            Entity monster6 = new Entity(675, 334, 14, 14, 3, 2);
+            Entity monster6 = new Entity(675, 334, monSize, monSize, monSpeed, 2); //Bottom Left monster #3
             enemy.Add(monster6);
+            Entity monster7 = new Entity(254, 377, monSize, monSize, monSpeed, 3); //Left side going up #1
+            enemy.Add(monster7);
+            Entity monster8 = new Entity(278, 377, monSize, monSize, monSpeed, 3); //Left side going up #2
+            enemy.Add(monster8);
+            Entity monster9 = new Entity(302, 377, monSize, monSize, monSpeed, 3); //Left side going up #3
+            enemy.Add(monster9);
+            Entity monster10 = new Entity(380, 210, monSize, monSize, monSpeed, 4); //Middle left side going down #1
+            enemy.Add(monster10);
+            Entity monster11 = new Entity(404, 210, monSize, monSize, monSpeed, 4); //Middle left side going down #2
+            enemy.Add(monster11);
+            Entity monster12 = new Entity(428, 210, monSize, monSize, monSpeed, 4); //Middle left side going down #3
+            enemy.Add(monster12);
+            Entity monster13 = new Entity(530, 377, monSize, monSize, monSpeed, 3); //Middle right side going up #1
+            enemy.Add(monster13);
+            Entity monster14 = new Entity(554, 377, monSize, monSize, monSpeed, 3); //Middle right side going up #2
+            enemy.Add(monster14);
+            Entity monster15 = new Entity(578, 377, monSize, monSize, monSpeed, 3); //Middle right side going up #3
+            enemy.Add(monster15);
+            Entity monster16 = new Entity(655, 210, monSize, monSize, monSpeed, 4); //Right side going down #1
+            enemy.Add(monster16);
+            Entity monster17 = new Entity(679, 210, monSize, monSize, monSpeed, 4); //Right side going down #2
+            enemy.Add(monster17);
+            Entity monster18 = new Entity(703, 210, monSize, monSize, monSpeed, 4); //Right side going down #3
+            enemy.Add(monster18);
+
 
             //Get the coordinates for the player starting location 
             player = new Entity(140, 290, 14, 14, 3); 
@@ -219,6 +248,7 @@ namespace WEG2
             if (upArrowDown)
             {
                 player.Move("Up");
+                
             }
 
             if (downArrowDown)
@@ -237,10 +267,10 @@ namespace WEG2
             }
 
             //TODO - Move the enemies
-
+            
 
             //TODO - Check collision between player and boundaries
-            
+
             foreach (Entity boundary in boundaries)
             {
                 if (boundary.Collision(player))

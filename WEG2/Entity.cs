@@ -93,10 +93,10 @@ namespace WEG2
         public Boolean Collision(Entity player)
         {
             Rectangle playerRec = new Rectangle(player.x, player.y, player.sizeX, player.sizeY);
-            Rectangle boundaryRec = new Rectangle(x, y, sizeX, sizeY);
+            Rectangle opposingRec = new Rectangle(x, y, sizeX, sizeY);
 
 
-            if (boundaryRec.IntersectsWith(playerRec))
+            if (opposingRec.IntersectsWith(playerRec))
             {
                 return true;
             }
