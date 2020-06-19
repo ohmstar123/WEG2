@@ -42,30 +42,6 @@ namespace WEG2
             sizeY = _sizeY;
         }
 
-        public void UpMovement()
-        {
-            //Make the enemy/player move up
-            y = y - speed;
-        }
-
-        public void DownMovement()
-        {
-            //Make the enemy/player move down
-            y = y + speed;
-        }
-
-        public void LeftMovement()
-        {
-            //Make the enemy/player move left
-            x = x - speed;
-        }
-
-        public void RightMovement()
-        {
-            //Make the enemy/player move right
-            x = x + speed;
-        }
-
         public void Move(string direction)
         {
             //Movement of the players depending what button is pressed

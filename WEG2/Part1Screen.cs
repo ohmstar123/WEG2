@@ -18,11 +18,10 @@ namespace WEG2
         //Create brushes to draw with 
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         SolidBrush blueBrush = new SolidBrush(Color.Blue);
-        SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
+        SolidBrush yellowBrush = new SolidBrush(Color.Goldenrod);
         SolidBrush grayBrush = new SolidBrush(Color.Gray);
         SolidBrush greenBrush = new SolidBrush(Color.LimeGreen);
         SolidBrush redBrush = new SolidBrush(Color.Red);
-        SolidBrush testBrush = new SolidBrush(Color.Orange);
 
         //Create one list for the enemies 
         List<Entity> enemy = new List<Entity>();
@@ -33,13 +32,19 @@ namespace WEG2
         List<Entity> playgroundWhite = new List<Entity>();
         List<Entity> playgroundGray = new List<Entity>();
 
-
-        //Create the four coins here so they can be manipulated later
+        //Create a list for the coins
+        List<Entity> coinList = new List<Entity>();
+        int coinNumber = 0;
 
         //Player values 
         Entity player;
+        int playerSpeed = 5;
 
-       
+        //Gate boolean 
+        Boolean gateOpenClose = false;
+
+        //Variable to store number of deaths
+        int fails = 0;
 
         
 
@@ -74,22 +79,20 @@ namespace WEG2
             playgroundWhite.Add(playArea8);
             Entity playArea9 = new Entity(725, 275, 50, 52);  //Bridge from main play area to barrier
             playgroundGray.Add(playArea9);
-            Entity playArea10 = new Entity(775, 250, 72, 102);//White game win zone 
+            Entity playArea10 = new Entity(775, 250, this.Width, 102);//White game win zone 
             playgroundWhite.Add(playArea10);
-            Entity playArea11 = new Entity(847, 250, this.Width, 102); // Green game win zone
-            playgroundGreen.Add(playArea11);
-            Entity playArea12 = new Entity(325, 179, 50, 21); //Bridge to first coin area
+            Entity playArea11 = new Entity(325, 179, 50, 21); //Bridge to first coin area
+            playgroundWhite.Add(playArea11);
+            Entity playArea12 = new Entity(312, 137, 75, 42); //First coin area
             playgroundWhite.Add(playArea12);
-            Entity playArea13 = new Entity(312, 137, 75, 42); //First coin area
+            Entity playArea13 = new Entity(600, 179, 50, 21); //Bridge to second coin area
             playgroundWhite.Add(playArea13);
-            Entity playArea14 = new Entity(600, 179, 50, 21); //Bridge to second coin area
+            Entity playArea14 = new Entity(587, 137, 75, 42); //Second coin area
             playgroundWhite.Add(playArea14);
-            Entity playArea15 = new Entity(587, 137, 75, 42); //Second coin area
+            Entity playArea15 = new Entity(462, 402, 50, 21); //Bridge to thrid coin area
             playgroundWhite.Add(playArea15);
-            Entity playArea16 = new Entity(462, 402, 50, 21); //Bridge to thrid coin area
-            playgroundGray.Add(playArea16);
-            Entity playArea17 = new Entity(450, 423, 75, 42); //Third coin area
-            playgroundGray.Add(playArea17);
+            Entity playArea16 = new Entity(450, 423, 75, 42); //Third coin area
+            playgroundWhite.Add(playArea16);
 
 
             //Get the coordinates for the boundaries and add them to the boundaries list
@@ -141,55 +144,82 @@ namespace WEG2
             boundaries.Add(boundary23);
             Entity boundary24 = new Entity(600, 275, 50, 52); //Inside third block
             boundaries.Add(boundary24);
+            Entity boundary25 = new Entity(this.Width, 0, 0, this.Height); //Right wall boundary
+            boundaries.Add(boundary25);
+            Entity boundary26 = new Entity(725, 275, 50, 52); //Boundary on top of gate infront of 4th coin
+            boundaries.Add(boundary26);
 
             //TODO - Get the coordinates for the monsters 
-            Entity monster1 = new Entity(284, 206, monSize, monSize, monSpeed, 1); //Top right monster #1
+            Entity monster1 = new Entity(254, 206, monSize, monSize, monSpeed, 1); //Top right monster #1
             enemy.Add(monster1);
-            Entity monster2 = new Entity(284, 230, monSize, monSize, monSpeed, 1); //Top right monster #2
+            Entity monster2 = new Entity(254, 230, monSize, monSize, monSpeed, 1); //Top right monster #2
             enemy.Add(monster2);
-            Entity monster3 = new Entity(284, 254, monSize, monSize, monSpeed, 1); //Top right monster #3
+            Entity monster3 = new Entity(254, 254, monSize, monSize, monSpeed, 1); //Top right monster #3
             enemy.Add(monster3);
-            Entity monster4 = new Entity(675, 382, monSize, monSize, monSpeed, 2); //Bottom Left monster #1
+            Entity monster4 = new Entity(705, 382, monSize, monSize, monSpeed, 2); //Bottom Left monster #1
             enemy.Add(monster4);
-            Entity monster5 = new Entity(675, 358, monSize, monSize, monSpeed, 2); //Bottom Left monster #2
+            Entity monster5 = new Entity(705, 358, monSize, monSize, monSpeed, 2); //Bottom Left monster #2
             enemy.Add(monster5);
-            Entity monster6 = new Entity(675, 334, monSize, monSize, monSpeed, 2); //Bottom Left monster #3
+            Entity monster6 = new Entity(705, 334, monSize, monSize, monSpeed, 2); //Bottom Left monster #3
             enemy.Add(monster6);
-            Entity monster7 = new Entity(254, 377, monSize, monSize, monSpeed, 3); //Left side going up #1
+            Entity monster7 = new Entity(254, 385, monSize, monSize, monSpeed, 3); //Left side going up #1
             enemy.Add(monster7);
-            Entity monster8 = new Entity(278, 377, monSize, monSize, monSpeed, 3); //Left side going up #2
+            Entity monster8 = new Entity(278, 385, monSize, monSize, monSpeed, 3); //Left side going up #2
             enemy.Add(monster8);
-            Entity monster9 = new Entity(302, 377, monSize, monSize, monSpeed, 3); //Left side going up #3
+            Entity monster9 = new Entity(302, 385, monSize, monSize, monSpeed, 3); //Left side going up #3
             enemy.Add(monster9);
-            Entity monster10 = new Entity(380, 210, monSize, monSize, monSpeed, 4); //Middle left side going down #1
+            Entity monster10 = new Entity(380, 202, monSize, monSize, monSpeed, 4); //Middle left side going down #1
             enemy.Add(monster10);
-            Entity monster11 = new Entity(404, 210, monSize, monSize, monSpeed, 4); //Middle left side going down #2
+            Entity monster11 = new Entity(404, 202, monSize, monSize, monSpeed, 4); //Middle left side going down #2
             enemy.Add(monster11);
-            Entity monster12 = new Entity(428, 210, monSize, monSize, monSpeed, 4); //Middle left side going down #3
+            Entity monster12 = new Entity(428, 202, monSize, monSize, monSpeed, 4); //Middle left side going down #3
             enemy.Add(monster12);
-            Entity monster13 = new Entity(530, 377, monSize, monSize, monSpeed, 3); //Middle right side going up #1
+            Entity monster13 = new Entity(530, 385, monSize, monSize, monSpeed, 3); //Middle right side going up #1
             enemy.Add(monster13);
-            Entity monster14 = new Entity(554, 377, monSize, monSize, monSpeed, 3); //Middle right side going up #2
+            Entity monster14 = new Entity(554, 385, monSize, monSize, monSpeed, 3); //Middle right side going up #2
             enemy.Add(monster14);
-            Entity monster15 = new Entity(578, 377, monSize, monSize, monSpeed, 3); //Middle right side going up #3
+            Entity monster15 = new Entity(578, 385, monSize, monSize, monSpeed, 3); //Middle right side going up #3
             enemy.Add(monster15);
-            Entity monster16 = new Entity(655, 210, monSize, monSize, monSpeed, 4); //Right side going down #1
+            Entity monster16 = new Entity(655, 202, monSize, monSize, monSpeed, 4); //Right side going down #1
             enemy.Add(monster16);
-            Entity monster17 = new Entity(679, 210, monSize, monSize, monSpeed, 4); //Right side going down #2
+            Entity monster17 = new Entity(679, 202, monSize, monSize, monSpeed, 4); //Right side going down #2
             enemy.Add(monster17);
-            Entity monster18 = new Entity(703, 210, monSize, monSize, monSpeed, 4); //Right side going down #3
+            Entity monster18 = new Entity(703, 202, monSize, monSize, monSpeed, 4); //Right side going down #3
             enemy.Add(monster18);
-
+            
 
             //Get the coordinates for the player starting location 
-            player = new Entity(140, 290, 14, 14, 3); 
+            player = new Entity(140, 290, 14, 14, playerSpeed);
 
-            //TODO - Get the coordinates for the coins and add them to the coins list
+            //Get the coordinates for the coins and add them to the coins list
+            Entity coin1 = new Entity(341, 153, 14, 14, 0);
+            coinList.Add(coin1);
+            Entity coin2 = new Entity(617, 153, 14, 14, 0);
+            coinList.Add(coin2);
+            Entity coin3 = new Entity(480, 435, 14, 14, 0);
+            coinList.Add(coin3);
+            Entity coin4 = new Entity(830, 293, 14, 14, 0);
+            coinList.Add(coin4);
+        }
 
+        private void continueButton_Click(object sender, EventArgs e)
+        {
+            gameLoop.Enabled = true;
+            pauseBackGround.Visible = false;
+            continueButton.Visible = false;
+            exitButton.Visible = false;
+            upArrowDown = false;
+            downArrowDown = false;
+        }
 
-            //TODO - Get the coordinates for the key 
-
-
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Form f = this.FindForm();
+            f.Controls.Remove(this);
+            MainScreen ms = new MainScreen();
+            f.Controls.Add(ms);
+            ms.Location = new Point((f.Width - ms.Width) / 2, (f.Height - ms.Height) / 2);
+            ms.Focus();
         }
 
         private void Part1Screen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -244,6 +274,30 @@ namespace WEG2
             int tempX = player.x;
             int tempY = player.y;
 
+            //Update number of fails counter and coins counter
+            coinLabel.Text = "COINS: " + coinNumber + " / 4";
+            failLabel.Text = "FAILS: " + fails;
+
+            //Check to see if the gate should be opened
+            if (coinList[0].speed == 1 & coinList[1].speed == 1 & coinList[2].speed == 1)
+            {
+                gateOpenClose = true;
+                boundaries[25].x = 0;
+                boundaries[25].y = 0;
+                boundaries[25].sizeX = 0;
+                boundaries[25].sizeY = 0;
+            }
+            else
+            {
+                gateOpenClose = false;
+                boundaries[25].x = 725;
+                boundaries[25].y = 275;
+                boundaries[25].sizeX = 50;
+                boundaries[25].sizeY = 52;
+            }
+           
+
+
             //Move the player
             if (upArrowDown)
             {
@@ -266,38 +320,139 @@ namespace WEG2
                 player.Move("Right");
             }
 
-            //TODO - Move the enemies
-            
+            //Add a pause menu
+            if (escapeDown)
+            {
+                gameLoop.Enabled = false;
+                continueButton.Visible = true;
+                exitButton.Visible = true;
+                pauseBackGround.Visible = true;
+            }
 
-            //TODO - Check collision between player and boundaries
+
+
+            //Move the enemies
+            for (int i = 0; i < enemy.Count; i++)
+            {
+                if (enemy[i].positionNumber == 1)
+                {
+                    enemy[i].x = enemy[i].x + enemy[i].speed;
+                }
+                else if (enemy[i].positionNumber == 2)
+                {
+                    enemy[i].x = enemy[i].x - enemy[i].speed;
+                }
+                else if (enemy[i].positionNumber == 3)
+                {
+                    enemy[i].y = enemy[i].y - enemy[i].speed;
+                }
+                else if (enemy[i].positionNumber == 4)
+                {
+                    enemy[i].y = enemy[i].y + enemy[i].speed;
+                }
+
+                if (enemy[i].x >= 705 & enemy[i].positionNumber == 1)
+                {
+                    enemy[i].positionNumber = 2;
+                    enemy[i].x = enemy[i].x - enemy[i].speed;
+                }
+                else if (enemy[i].x <= 254 & enemy[i].positionNumber == 2)
+                {
+                    enemy[i].positionNumber = 1;
+                    enemy[i].x = enemy[i].x + enemy[i].speed;
+                }
+                else if (enemy[i].y <= 202 & enemy[i].positionNumber == 3)
+                {
+                    enemy[i].positionNumber = 4;
+                    enemy[i].y = enemy[i].y + enemy[i].speed;
+                }
+                else if (enemy[i].y >= 385 & enemy[i].positionNumber == 4)
+                {
+                    enemy[i].positionNumber = 3;
+                    enemy[i].y = enemy[i].y - enemy[i].speed;
+                }
+            }
+
+            //Check collision between player and boundaries
 
             foreach (Entity boundary in boundaries)
             {
                 if (boundary.Collision(player))
                 {
-                    player = new Entity(tempX, tempY, 14, 14, 3);
+                    player = new Entity(tempX, tempY, 14, 14, playerSpeed);
                     
                 }
             }
 
-            //TODO - Check collision between player and enemies
+            //TODO - Check collision between player and enemies 
+            foreach (Entity mons in enemy)
+            {
+                if (mons.Collision(player))
+                {
+                    player = new Entity(140, 290, 14, 14, playerSpeed);
+                    coinList[0].x = 341; coinList[0].y = 153;
+                    coinList[1].x = 617; coinList[1].y = 153;
+                    coinList[2].x = 480; coinList[2].y = 435;
+                    coinList[3].x = 830; coinList[3].y = 293;
+                    coinNumber = 0;
+                    gateOpenClose = false;
+                    boundaries[25].x = 725; boundaries[25].y = 275;
+                    boundaries[25].sizeX = 50; boundaries[25].sizeY = 52;
+                    coinList[0].speed = 0;
+                    coinList[1].speed = 0;
+                    coinList[2].speed = 0; 
+                    coinList[3].speed = 0;
+                    fails++;
 
+                }
+            }
 
             //TODO - Check collision between player and coins
+            foreach (Entity coins in coinList)
+            {
+                if (coins.Collision(player))
+                {
+                    coins.x = 0;
+                    coins.y = 0;
+                    coins.speed = 1;
+                    coinNumber++;
+                }
+            }
 
-
-            //TODO - Check collision between player and key 
-
+            //Check collision between player and win zone
+            if (coinList[3].speed == 1)
+            {
+                foreach (Entity zone in playgroundGreen)
+                {
+                    if (zone.Collision(player))
+                    {
+                        coinList[3].speed = 0;
+                        Form f = this.FindForm();
+                        f.Controls.Remove(this);
+                        WinScreen ws = new WinScreen();
+                        f.Controls.Add(ws);
+                        ws.Location = new Point((f.Width - ws.Width) / 2, (f.Height - ws.Height) / 2);
+                        ws.Focus();
+                    }
+                }
+            }
 
             Refresh();
         }
 
         private void Part1Screen_Paint(object sender, PaintEventArgs e)
         {
-            //TODO - Draw the area which the player will be allowed on 
+            //Draw the area which the player will be allowed on 
             foreach (Entity p in playgroundGreen)
             {
-                e.Graphics.FillRectangle(greenBrush, p.x, p.y, p.sizeX, p.sizeY);
+                if (coinList[3].speed == 1)
+                {
+                    e.Graphics.FillRectangle(greenBrush, p.x, p.y, p.sizeX, p.sizeY);
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(whiteBrush, p.x, p.y, p.sizeX, p.sizeY);
+                }
             }
 
             foreach (Entity w in playgroundWhite)
@@ -307,23 +462,31 @@ namespace WEG2
 
             foreach (Entity b in playgroundGray)
             {
-                e.Graphics.FillRectangle(grayBrush, b.x, b.y, b.sizeX, b.sizeY);
+                if (gateOpenClose)
+                {
+                    e.Graphics.FillRectangle(whiteBrush, b.x, b.y, b.sizeX, b.sizeY);
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(grayBrush, b.x, b.y, b.sizeX, b.sizeY);
+                }
+                
             }
 
-            //TODO - FOR NOW, draw in the boundaries but delete them after because they must not be showing
-            foreach (Entity b in boundaries)
+            //Draw the coins 
+            foreach (Entity c in coinList)
             {
-                e.Graphics.FillRectangle(testBrush, b.x, b.y, b.sizeX, b.sizeY);
+                e.Graphics.FillEllipse(yellowBrush, c.x, c.y, c.sizeX, c.sizeY);
             }
 
-            //TODO - Draw the enemies
+            //Draw the enemies
             foreach (Entity m in enemy)
             {
                 e.Graphics.FillEllipse(blueBrush, m.x, m.y, m.sizeX, m.sizeY);
             }
 
 
-            //TODO - Draw the player (which should be a square)
+            //Draw the player (which should be a square)
             e.Graphics.FillRectangle(redBrush, player.x, player.y, player.sizeX, player.sizeY);
         }
     }
