@@ -11,6 +11,9 @@ using System.Media;
 
 namespace WEG2
 {
+    /// <summary>
+    /// Goal is to obtain all four coins and making your way back to the start without touching the obstacles
+    /// </summary>
     public partial class MainScreen : UserControl
     {
         SoundPlayer player = new SoundPlayer(Properties.Resources.SelectSound);
