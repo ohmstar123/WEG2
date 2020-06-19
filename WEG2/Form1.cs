@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace WEG2
 {
@@ -15,7 +16,7 @@ namespace WEG2
         public Form1()
         {
             InitializeComponent(); 
-            //Cursor.Hide();      
+            Cursor.Hide();
         }
 
         private void Form1_Load(object sender, EventArgs e)

@@ -7,14 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace WEG2
 {
     public partial class MainScreen : UserControl
     {
+        SoundPlayer player = new SoundPlayer(Properties.Resources.SelectSound);
+        SoundPlayer playerBackGround = new SoundPlayer(Properties.Resources.backGroundMusic);
+
         public MainScreen()
         {
             InitializeComponent();
+            playerBackGround.PlayLooping();
         }
 
         private void endGameButton_Click(object sender, EventArgs e)
@@ -25,7 +30,9 @@ namespace WEG2
 
         private void playGameButton_Click(object sender, EventArgs e)
         {
-            //add a message in the middle of the screen that says 
+            //Add a game screen and center it
+            player.PlaySync();
+
             Form f = this.FindForm();
             f.Controls.Remove(this);
             Part1Screen p1 = new Part1Screen();
@@ -36,7 +43,15 @@ namespace WEG2
 
         private void instructionsButton_Click(object sender, EventArgs e)
         {
-            //TODO - add an instructions page and center the screen
+            //Add an instructions page and center the screen
+            player.PlaySync();
+
+            Form f = this.FindForm();
+            f.Controls.Remove(this);
+            InstructionScreen ins = new InstructionScreen();
+            f.Controls.Add(ins);
+            ins.Location = new Point((f.Width - ins.Width) / 2, (f.Height - ins.Height) / 2);
+            ins.Focus();
         }
     }
 }

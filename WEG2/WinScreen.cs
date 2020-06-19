@@ -7,18 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace WEG2
 {
     public partial class WinScreen : UserControl
     {
+        SoundPlayer player = new SoundPlayer(Properties.Resources.SelectSound);
+        
+
         public WinScreen()
         {
             InitializeComponent();
+            SoundPlayer playerVictory = new SoundPlayer(Properties.Resources.VictoryMusic);
+            playerVictory.Play();
         }
 
         private void playGameButton_Click(object sender, EventArgs e)
         {
+            player.PlaySync();
+
             Form f = this.FindForm();
             f.Controls.Remove(this);
             Part1Screen p1 = new Part1Screen();
@@ -29,6 +37,8 @@ namespace WEG2
 
         private void endGameButton_Click(object sender, EventArgs e)
         {
+            player.PlaySync();
+
             Form f = this.FindForm();
             f.Controls.Remove(this);
             MainScreen ms = new MainScreen();

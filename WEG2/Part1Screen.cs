@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace WEG2
 {
     public partial class Part1Screen : UserControl
     {
+        //Add sounds
+        SoundPlayer playerSound = new SoundPlayer(Properties.Resources.SelectSound);
+        SoundPlayer playerBackGround = new SoundPlayer(Properties.Resources.backGroundMusic);
+
         //Create buttons for the player movement and a button for the pause screen
         Boolean upArrowDown, downArrowDown, leftArrowDown, rightArrowDown, escapeDown;
 
@@ -38,7 +43,7 @@ namespace WEG2
 
         //Player values 
         Entity player;
-        int playerSpeed = 5;
+        int playerSpeed = 3;
 
         //Gate boolean 
         Boolean gateOpenClose = false;
@@ -56,8 +61,11 @@ namespace WEG2
 
         public void OnStart()
         {
+            //Background music
+            playerBackGround.PlayLooping();
+
             //Variables used
-            int monSpeed = 3;
+            int monSpeed = 4;
             int monSize = 14;
 
             //Get the coordinates for the player area and add them to the playground list
@@ -204,6 +212,9 @@ namespace WEG2
 
         private void continueButton_Click(object sender, EventArgs e)
         {
+            playerSound.PlaySync();
+            playerBackGround.PlayLooping();
+
             gameLoop.Enabled = true;
             pauseBackGround.Visible = false;
             continueButton.Visible = false;
@@ -214,6 +225,8 @@ namespace WEG2
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            playerSound.PlaySync();
+
             Form f = this.FindForm();
             f.Controls.Remove(this);
             MainScreen ms = new MainScreen();
@@ -323,6 +336,8 @@ namespace WEG2
             //Add a pause menu
             if (escapeDown)
             {
+                playerSound.Play();
+
                 gameLoop.Enabled = false;
                 continueButton.Visible = true;
                 exitButton.Visible = true;
@@ -400,7 +415,7 @@ namespace WEG2
                     boundaries[25].sizeX = 50; boundaries[25].sizeY = 52;
                     coinList[0].speed = 0;
                     coinList[1].speed = 0;
-                    coinList[2].speed = 0; 
+                    coinList[2].speed = 0;
                     coinList[3].speed = 0;
                     fails++;
 

@@ -36,6 +36,7 @@
             this.playGameButton = new System.Windows.Forms.Button();
             this.instructionsButton = new System.Windows.Forms.Button();
             this.endGameButton = new System.Windows.Forms.Button();
+            this.MadebyLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // topBlackLabel
@@ -122,11 +123,25 @@
             this.endGameButton.UseVisualStyleBackColor = true;
             this.endGameButton.Click += new System.EventHandler(this.endGameButton_Click);
             // 
+            // MadebyLabel
+            // 
+            this.MadebyLabel.AutoSize = true;
+            this.MadebyLabel.BackColor = System.Drawing.Color.Black;
+            this.MadebyLabel.Font = new System.Drawing.Font("Arial Rounded MT Bold", 19F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MadebyLabel.ForeColor = System.Drawing.Color.White;
+            this.MadebyLabel.Location = new System.Drawing.Point(18, 14);
+            this.MadebyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.MadebyLabel.Name = "MadebyLabel";
+            this.MadebyLabel.Size = new System.Drawing.Size(390, 44);
+            this.MadebyLabel.TabIndex = 15;
+            this.MadebyLabel.Text = "Made by: Ohm Patel";
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Controls.Add(this.MadebyLabel);
             this.Controls.Add(this.endGameButton);
             this.Controls.Add(this.instructionsButton);
             this.Controls.Add(this.playGameButton);
@@ -152,5 +167,6 @@
         private System.Windows.Forms.Button playGameButton;
         private System.Windows.Forms.Button instructionsButton;
         private System.Windows.Forms.Button endGameButton;
+        private System.Windows.Forms.Label MadebyLabel;
     }
 }
