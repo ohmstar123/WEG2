@@ -132,9 +132,8 @@
             this.MadebyLabel.Location = new System.Drawing.Point(18, 14);
             this.MadebyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.MadebyLabel.Name = "MadebyLabel";
-            this.MadebyLabel.Size = new System.Drawing.Size(390, 44);
+            this.MadebyLabel.Size = new System.Drawing.Size(0, 44);
             this.MadebyLabel.TabIndex = 15;
-            this.MadebyLabel.Text = "Made by: Ohm Patel";
             // 
             // MainScreen
             // 
